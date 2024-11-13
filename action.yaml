@@ -17,6 +17,10 @@ inputs:
     required: false
     description: 'Name of AWS region to be used.'
     default: 'us-west-2'
+  session-name:
+    required: false
+    description: 'Name of the AWS assumed role session.'
+    default: 'assume-role-from-gha'
 
 runs:
   using: "composite"
@@ -27,6 +31,7 @@ runs:
       role-to-assume: ${{ inputs.role-arn }}
       aws-region: ${{ inputs.region }}
       mask-aws-account-id: 'no'
+      role-session-name: ${{ inputs.session-name }}
 
   - name: Setup Profile
     shell: bash
